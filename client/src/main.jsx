@@ -1,0 +1,1 @@
+import './kada-app.jsx';
