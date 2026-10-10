@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    { "source": "/((?!api/|assets/|images/|manus-routes\\.json).*)", "destination": "/" }
+  ]
 }

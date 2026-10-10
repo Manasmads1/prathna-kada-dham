@@ -6,7 +6,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 
 const __filename=fileURLToPath(import.meta.url); const __dirname=path.dirname(__filename);
-const app=express(); const server=createServer(app); app.use(express.json());
+export const app=express(); const server=createServer(app); app.use(express.json());
 const PORT=Number(process.env.PORT||3000); const SECRET=process.env.JWT_SECRET||'dev-only-change-me';
 const dataPath=process.env.DATA_FILE||path.resolve(process.cwd(),'data/kada-dham.json');
 const allowedDomains=['gmail.com','yahoo.com','yahoo.co.in','googlemail.com'];
@@ -42,4 +42,4 @@ app.post('/api/payments/initiate',(req,res)=>{try{const u=userFrom(req);const b=
 app.post('/api/payments/confirm/:id',(req,res)=>{try{const u=userFrom(req);const b=store.bookings.find(x=>x.id===req.params.id&&x.user_id===u.id);if(!b)return res.status(404).json({detail:'Booking not found'});b.status='confirmed';b.payment_status='completed';persist();res.json({success:true,message:'Payment confirmed successfully'})}catch(e){err(res,e)}});
 app.get('/api/temple-info',(_req,res)=>res.json(temple));
 app.get('/manus-routes.json',(_req,res)=>res.json({routes:[{path:'/',title:'Home'},{path:'/pujas',title:'Pujas'},{path:'/pujas/:id',title:'Puja detail'},{path:'/temple',title:'Temple'},{path:'/videos',title:'Videos'},{path:'/login',title:'Login'},{path:'/dashboard',title:'Dashboard'},{path:'/orders',title:'Orders'},{path:'/orders/:id',title:'Order detail'},{path:'/profile',title:'Profile'},{path:'/about',title:'About'},{path:'/contact',title:'Contact'}]}));
-const staticPath=path.resolve(__dirname,'..','dist');app.use(express.static(staticPath));app.get('*',(_req,res)=>res.sendFile(path.join(staticPath,'index.html')));server.listen(PORT,'0.0.0.0',()=>console.log(`Kada Dham server on ${PORT}`));
+const staticPath=path.resolve(__dirname,'..','dist');app.use(express.static(staticPath));app.get('*',(_req,res)=>res.sendFile(path.join(staticPath,'index.html')));if(process.env.VERCEL!=='1')server.listen(PORT,'0.0.0.0',()=>console.log(`Kada Dham server on ${PORT}`));

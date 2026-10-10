@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import { ArrowRight, CalendarDays, Check, ChevronDown, Clock3, Copy, ExternalLink, HeartHandshake, Image as ImageIcon, Landmark, LogIn, LogOut, Mail, MapPin, Menu, MessageCircle, Phone, Search, ShieldCheck, Sparkles, User, X } from 'lucide-react';
 import './styles.css';
 
