@@ -70,8 +70,9 @@ Backend validation covers supported email domains, lowercase normalization, six-
 1. **OTP delivery:** the PRD currently exposes `mock_otp` for testing. This build keeps that documented behavior and labels it in the UI. Replace it with a real email/SMS provider, throttle requests, and limit verification attempts before launch.
 2. **Payment verification:** the PRD’s current flow uses UPI/PhonePe deep links and manual confirmation. This build implements that exact behavior and does not claim gateway verification. Add a verified provider callback/webhook and transaction/receipt fields before treating payment as final.
 3. **MongoDB:** swap the local file adapter for the documented MongoDB persistence layer and indexes.
-4. **Original media:** all temple imagery is clearly labeled as open-source placeholder photography. Replace the centralized image URLs in `client/src/kada-app.jsx` and backend `pujas`/`temple` data when original temple photos and logos are supplied.
-5. **Official claims/content:** no undocumented prices, timings, statistics, testimonials, or religious claims were added.
+4. **Image rights:** owner-supplied photos from `prathna.zip` are in `client/public/images/kada-dham/`; additional public visitor imagery and its source reference are documented in `IMAGE_SOURCES.md`. Verify third-party reproduction rights before commercial use.
+5. **Visit details:** listed opening hours and address are cross-referenced to the public visitor listing and displayed with a festival-day confirmation note. Call locally to verify before travel.
+6. **Official claims/content:** the website does not claim official affiliation, verified reviews, unsupported prices, or guaranteed puja arrangements. Confirm the catalogue and ritual details with the temple.
 
 ## Contact links
 
