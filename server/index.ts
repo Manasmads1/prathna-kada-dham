@@ -1,11 +1,10 @@
 import express from 'express';
 import { createServer } from 'http';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import crypto from 'crypto';
 import fs from 'fs';
 
-const __filename=fileURLToPath(import.meta.url); const __dirname=path.dirname(__filename);
+const __dirname=process.cwd();
 export const app=express(); const server=createServer(app); app.use(express.json());
 const PORT=Number(process.env.PORT||3000); const SECRET=process.env.JWT_SECRET||'dev-only-change-me';
 const dataPath=process.env.DATA_FILE||path.resolve(process.cwd(),'data/kada-dham.json');
