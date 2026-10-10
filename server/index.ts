@@ -10,18 +10,29 @@ const PORT=Number(process.env.PORT||3000); const SECRET=process.env.JWT_SECRET||
 const dataPath=process.env.DATA_FILE||path.resolve(process.cwd(),'data/kada-dham.json');
 const allowedDomains=['gmail.com','yahoo.com','yahoo.co.in','googlemail.com'];
 const pujas=[
-{id:'puja_1',name:'Daily Darshan & Aarti',category:'Daily Puja',price:51,duration:'30 minutes',description:'A simple daily offering for darshan and aarti.',benefits:['Darshan guidance','Aarti offering','Prasad']},
-{id:'puja_2',name:'Sheetla Ashtami Special Puja',category:'Special Puja',price:501,duration:'1 hour',description:'A special puja offering at Sheetla Mata Mandir.',benefits:['Sankalp','Puja offering','Prasad']},
-{id:'puja_3',name:'Navratri Special Puja',category:'Festival Puja',price:1100,duration:'1 hour',description:'A festival puja offering for the Navratri period.',benefits:['Sankalp','Puja offering','Prasad']},
-{id:'puja_4',name:'Disease Removal Puja (Rog Mukti)',category:'Health Puja',price:2100,duration:'1.5 hours',description:'A health-focused devotional puja offering.',benefits:['Sankalp','Puja offering','Prasad']},
-{id:'puja_5',name:'Health & Wellness Puja',category:'Health Puja',price:1501,duration:'1 hour',description:'A puja offering for health and wellness intentions.',benefits:['Sankalp','Puja offering','Prasad']},
-{id:'puja_6',name:'Santan Prapti Puja',category:'Special Puja',price:2501,duration:'1.5 hours',description:'A special puja offering for family intentions.',benefits:['Sankalp','Puja offering','Prasad']},
-{id:'puja_7',name:'Kund Darshan',category:'Special Puja',price:5100,duration:'1 hour',description:'Sacred darshan of the holy Kund at Kada Dham.',benefits:['Holy bath blessings','Purification','Divine grace','Special prasad']},
-{id:'offering_1',name:'Chunri & Coconut Offering',category:'Offerings',price:101,duration:'—',description:'A devotional offering of chunri and coconut.',benefits:['Chunri offering','Coconut offering']},
-{id:'offering_2',name:'Flowers & Prasad Offering',category:'Offerings',price:151,duration:'—',description:'Flowers and prasad offered in your name.',benefits:['Flower offering','Prasad']},
-{id:'offering_3',name:'Full Shringar Offering',category:'Offerings',price:501,duration:'—',description:'A full shringar offering for Sheetla Mata.',benefits:['Shringar offering','Prasad']},
-].map((p,i)=>({...p,image:['https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85','https://images.unsplash.com/photo-1604514628550-37477afdf4e3?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1594911772125-37d4c9c9b0c8?auto=format&fit=crop&w=1000&q=85'][i%4]}));
-const temple={name:'Kada Dham - Sheetla Mata Mandir',description:'Kada Dham is one of the 51 Shakti Peethas...',history:'According to Skanda Purana mythology...',location:'Village near Sirathu, Kaushambi District, Uttar Pradesh...',timings:'Daily: 5:00 AM - 12:00 PM, 4:00 PM - 9:00 PM',priest_name:'Manish Pandey (Kada Dham Pujari)',priest_contact:'+91 9651409610',images:['https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85','https://images.unsplash.com/photo-1604514628550-37477afdf4e3?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1000&q=85']};
+  {id:'puja_1',name:'Daily Darshan & Aarti',category:'Daily Puja',price:51,duration:'30 minutes',description:'A simple devotional offering for darshan and aarti.',benefits:['Darshan guidance','Aarti offering','Prasad']},
+  {id:'puja_2',name:'Sheetla Ashtami Special Puja',category:'Special Puja',price:501,duration:'1 hour',description:'A special devotional offering at Sheetla Mata Mandir.',benefits:['Sankalp','Puja offering','Prasad']},
+  {id:'puja_3',name:'Navratri Special Puja',category:'Festival Puja',price:1100,duration:'1 hour',description:'A festival puja offering for the Navratri period.',benefits:['Sankalp','Puja offering','Prasad']},
+  {id:'puja_4',name:'Disease Removal Puja (Rog Mukti)',category:'Health Puja',price:2100,duration:'1.5 hours',description:'A devotional sankalp for health and strength. This is not medical treatment.',benefits:['Sankalp','Puja offering','Prasad']},
+  {id:'puja_5',name:'Health & Wellness Puja',category:'Health Puja',price:1501,duration:'1 hour',description:'A prayer offering for health and well-being; not a substitute for medical care.',benefits:['Sankalp','Puja offering','Prasad']},
+  {id:'puja_6',name:'Santan Prapti Puja',category:'Special Puja',price:2501,duration:'1.5 hours',description:'A special puja offering for family intentions.',benefits:['Sankalp','Puja offering','Prasad']},
+  {id:'puja_7',name:'Kund Darshan',category:'Special Puja',price:5100,duration:'1 hour',description:'A visit offering for the Kund at Kada Dham; confirm access and arrangements before travelling.',benefits:['Darshan guidance','Puja offering','Prasad']},
+  {id:'offering_1',name:'Chunri & Coconut Offering',category:'Offerings',price:101,duration:'—',description:'A devotional offering of chunri and coconut.',benefits:['Chunri offering','Coconut offering']},
+  {id:'offering_2',name:'Flowers & Prasad Offering',category:'Offerings',price:151,duration:'—',description:'An offering of flowers and prasad in your name.',benefits:['Flower offering','Prasad']},
+  {id:'offering_3',name:'Full Shringar Offering',category:'Offerings',price:501,duration:'—',description:'A devotional shringar offering for Sheetla Mata.',benefits:['Shringar offering','Prasad']},
+].map((p,i)=>({...p,image:[
+  '/images/kada-dham/main-entrance-devotees.jpg',
+  '/images/kada-dham/sheetla-mata-darshan.jpg',
+  '/images/kada-dham/temple-gateway.jpg',
+  '/images/kada-dham/temple-darshan-visitor-photo.jpg',
+  '/images/kada-dham/sheetla-mata-flower-darshan.jpg',
+  '/images/kada-dham/sheetla-mata-darshan.jpg',
+  '/images/kada-dham/temple-exterior.jpg',
+  '/images/kada-dham/sanctum-entrance.jpg',
+  '/images/kada-dham/temple-darshan-visitor-photo.jpg',
+  '/images/kada-dham/sheetla-mata-flower-darshan.jpg',
+][i]}));
+const temple={name:'Kada Dham - Sheetla Mata Mandir',description:'Sheetla Mata Mandir at Ma Sheetla Dham, Kade, Kaushambi, Uttar Pradesh.',history:'For temple traditions and ceremony arrangements, please contact the temple directly.',location:'Ma Sheetla Dham, Kade, Uttar Pradesh 212205, India',timings:'Listed daily: 5:00 AM - 11:00 AM and 12:30 PM - 9:00 PM; confirm on festival days.',priest_name:'Kada Dham temple contact',priest_contact:'+91 9651409610',images:['/images/kada-dham/temple-gateway.jpg','/images/kada-dham/sheetla-mata-darshan.jpg','/images/kada-dham/main-entrance-devotees.jpg']};
 type Store={users:any[];otps:any[];bookings:any[]};
 function load():Store{try{if(fs.existsSync(dataPath))return JSON.parse(fs.readFileSync(dataPath,'utf8'))}catch{};return {users:[],otps:[],bookings:[]}}
 let store=load(); function persist(){fs.mkdirSync(path.dirname(dataPath),{recursive:true});fs.writeFileSync(dataPath,JSON.stringify(store,null,2))}
